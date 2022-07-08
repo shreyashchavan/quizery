@@ -10,13 +10,13 @@ void help();
 void edit_score(float , char []);
 
 int main()
-     {
-     int countr,r,r1,count,i,n;
+   {
+     time_t tm;
+     int countr,r,round1,count,i,n;
      float score;
      char choice;
      char playername[20];
-     time_t t;
-	 time(&t);
+     time(&tm);
      menue:  //menu
 		system("cls");
 		printf("\n\t\t________________________________________");
@@ -36,13 +36,13 @@ int main()
 		printf("\n\t\t -> Press Q to Quit             ");
 		printf("\n\t\t________________________________________\n\n");
 			
-		for(i=0;i<80;i++)
+		for(i=0;i<=79;i++)
 			printf("=");
 	    
-		printf("\nDate and Time : %s",ctime(&t));
+		printf("\nDate and Time : %s",ctime(&tm));
 	    
-		for(i=0;i<80;i++)
-			printf("=");
+		for(i=0;i<=79;i++)
+			printf("|");
      choice=toupper(getch());
      
 	 if (choice=='V')
@@ -74,7 +74,7 @@ int main()
     printf("\n ------------------  Welcome %s to Quiz Game -----------------------------",playername);
     printf("\n\n Here are some tips you might wanna know before playing:");
     printf("\n -------------------------------------------------------------------------");
-	help();
+    help();
     printf("\n\n\n Press Y  to start the game!\n");
     printf("\n Press any other key to return to the main menu!");
     if (toupper(getch())=='Y')
@@ -93,10 +93,10 @@ int main()
      for(i=1;i<=3;i++)
      {
     system("cls");
-     r1=i;
+     round1=i;
 
 
-     switch(r1)
+     switch(round1)
 		{
 		case 1:
 		printf("\n\nWhich of the following is a Palindrome number?");
@@ -486,12 +486,12 @@ void get_score()  // simple file system used for storing data
     {
 		system("cls");
 		char name[20];
-		float scr;
+		float sc;
 		FILE *f;
 		f=fopen("score.txt","r");
-		fscanf(f,"%s%f",&name,&scr);
+		fscanf(f,"%s%f",&name,&sc);
 		printf("\n\n\t\t*************************************************************");
-		printf("\n\n\t\t %s has secured the Highest Score %0.2f",name,scr);
+		printf("\n\n\t\t %s has secured the Highest Score %0.2f",name,sc);
 		printf("\n\n\t\t*************************************************************");
 		fclose(f);
 		getch();
@@ -501,28 +501,28 @@ void reset_score()  // reset your score
     {
 		system("cls");
 		float sc;
-		char nm[20];
+		char name[20];
 		FILE *f;
 		f=fopen("score.txt","r+");
-		fscanf(f,"%s%f",&nm,&sc);
+		fscanf(f,"%s%f",&name,&sc);
 		sc=0;
-		fprintf(f,"%s,%.2f",nm,sc);
+		fprintf(f,"%s,%.2f",name,sc);
 		fclose(f);
 	}
 
-void edit_score(float score, char plnm[20])  // updataion of score
+void edit_score(float score, char playernm[20])  // updataion of score
 	{
 		system("cls");
 			float sc;
-			char nm[20];
+			char name[20];
 			FILE *f;
 			f=fopen("score.txt","r");
-			fscanf(f,"%s%f",&nm,&sc);
+			fscanf(f,"%s%f",&name,&sc);
 			if (score>=sc)
 			{ sc=score;
 				fclose(f);
 				f=fopen("score.txt","w");
-				fprintf(f,"%s\n%.2f",plnm,sc);
+				fprintf(f,"%s\n%.2f",playernm,sc);
 				fclose(f);
 			}
 	}
